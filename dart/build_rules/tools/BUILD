@@ -5,5 +5,6 @@ filegroup(
     srcs = select({
         "//dart:darwin": ["dart2js_helper.sh"],
         "//dart:k8": ["dart2js_helper.sh"],
+        "//dart:windows": ["dart2js_helper.cmd"],
     }),
 )

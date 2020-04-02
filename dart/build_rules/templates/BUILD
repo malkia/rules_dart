@@ -5,6 +5,7 @@ filegroup(
     srcs = select({
         "//dart:darwin": ["dart_vm_binary.sh"],
         "//dart:k8": ["dart_vm_binary.sh"],
+        "//dart:windows": ["dart_vm_binary.cmd"],
     }),
 )
 
@@ -21,6 +22,7 @@ filegroup(
     srcs = select({
         "//dart:darwin": ["dart_vm_test.sh"],
         "//dart:k8": ["dart_vm_test.sh"],
+        "//dart:windows": ["dart_vm_test.cmd"],
     }),
 )
 
@@ -29,5 +31,6 @@ filegroup(
     srcs = select({
         "//dart:darwin": ["dart_vm_test_coverage.sh"],
         "//dart:k8": ["dart_vm_test_coverage.sh"],
+        "//dart:windows": ["dart_vm_test_coverage.cmd"],
     }),
 )

@@ -22,18 +22,18 @@ package(default_visibility = [ "//visibility:public" ])
 
 filegroup(
   name = "dart_vm",
-  srcs = ["dart-sdk/bin/dart"],
+  srcs = ["dart-sdk/bin/dart.exe"],
 )
 
 filegroup(
   name = "dart2js",
-  srcs = ["dart-sdk/bin/dart2js"],
+  srcs = ["dart-sdk/bin/dart2js.bat"],
 )
 
 filegroup(
   name = "dart2js_support",
   srcs = glob([
-      "dart-sdk/bin/dart",
+      "dart-sdk/bin/dart.exe",
       "dart-sdk/bin/snapshots/dart2js.dart.snapshot",
       "dart-sdk/lib/**",
   ]),
@@ -41,14 +41,14 @@ filegroup(
 
 filegroup(
   name = "pub",
-  srcs = ["dart-sdk/bin/pub"],
+  srcs = ["dart-sdk/bin/pub.bat"],
 )
 
 filegroup(
   name = "pub_support",
   srcs = glob([
       "dart-sdk/version",
-      "dart-sdk/bin/dart",
+      "dart-sdk/bin/dart.exe",
       "dart-sdk/bin/snapshots/pub.dart.snapshot",
   ]),
 )
@@ -67,5 +67,12 @@ def dart_repositories():
       name = "dart_darwin_x86_64",
       url = "https://storage.googleapis.com/dart-archive/channels/stable/release/2.7.2/sdk/dartsdk-macos-x64-release.zip",
       sha256 = "529281db2b4450c1aabdda0e6c53ccfa5709869dae56d248fb62365c0ea03f84",
+      build_file_content = _DART_SDK_BUILD_FILE,
+  )
+
+  http_archive(
+      name = "dart_windows_x86_64",
+      url = "https://storage.googleapis.com/dart-archive/channels/stable/release/2.7.2/sdk/dartsdk-windows-x64-release.zip",
+      sha256 = "85b99331c448ba977cd9b6158968af878b7fa44e91fa5df3be055a5287a30343",
       build_file_content = _DART_SDK_BUILD_FILE,
   )

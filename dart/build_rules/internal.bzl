@@ -226,7 +226,7 @@ def layout_action(ctx, srcs, output_dir):
   Returns:
     A map from input file short_path to File in output_dir.
   """
-  commands = []
+  commands = ["@echo off"]
   output_files = {}
   # TODO(cbracken) extract next two lines to func
   if not output_dir.endswith("/"):
@@ -235,14 +235,17 @@ def layout_action(ctx, srcs, output_dir):
     dest_file = ctx.actions.declare_file(output_dir + src_file.short_path)
     dest_dir = dest_file.path[:dest_file.path.rfind("/")]
     link_target = _relative_path(dest_dir, src_file.path)
-    commands += ["ln -s '%s' '%s'" % (link_target, dest_file.path)]
+    #commands += ["ln -s '%s' '%s'" % (link_target, dest_file.path)]
+    # Turns out "mklink.exe" does not function, but "mklink" does.
+    commands += ["ECHO mklink \"%s\" \"%s\"" % (dest_file.path, link_target)]
+    commands += ["mklink \"%s\" \"%s\"" % (dest_file.path.replace("/", "\\"), link_target.replace("/", "\\"))]
     output_files[src_file.short_path] = dest_file
 
   # Emit layout script.
-  layout_cmd = ctx.actions.declare_file(ctx.label.name + "_layout.sh")
+  layout_cmd = ctx.actions.declare_file(ctx.label.name + "_layout.cmd")
   ctx.actions.write(
       output=layout_cmd,
-      content="#!/bin/bash\n" + "\n".join(commands),
+      content="\n".join(commands),
       is_executable=True,
   )
 

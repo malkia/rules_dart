@@ -5,6 +5,7 @@ filegroup(
     srcs = select({
         "//dart:darwin": ["@dart_darwin_x86_64//:dart_vm"],
         "//dart:k8": ["@dart_linux_x86_64//:dart_vm"],
+        "//dart:windows": ["@dart_windows_x86_64//:dart_vm"],
     }),
 )
 
@@ -13,6 +14,7 @@ filegroup(
     srcs = select({
         "//dart:darwin": ["@dart_darwin_x86_64//:dart2js"],
         "//dart:k8": ["@dart_linux_x86_64//:dart2js"],
+        "//dart:windows": ["@dart_windows_x86_64//:dart2js"],
     }),
 )
 
@@ -21,5 +23,6 @@ filegroup(
     srcs = select({
         "//dart:darwin": ["@dart_darwin_x86_64//:dart2js_support"],
         "//dart:k8": ["@dart_linux_x86_64//:dart2js_support"],
+        "//dart:windows": ["@dart_windows_x86_64//:dart2js_support"],
     }),
 )
