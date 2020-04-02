@@ -237,7 +237,6 @@ def layout_action(ctx, srcs, output_dir):
     link_target = _relative_path(dest_dir, src_file.path)
     #commands += ["ln -s '%s' '%s'" % (link_target, dest_file.path)]
     # Turns out "mklink.exe" does not function, but "mklink" does.
-    commands += ["ECHO mklink \"%s\" \"%s\"" % (dest_file.path, link_target)]
     commands += ["mklink \"%s\" \"%s\"" % (dest_file.path.replace("/", "\\"), link_target.replace("/", "\\"))]
     output_files[src_file.short_path] = dest_file
 
